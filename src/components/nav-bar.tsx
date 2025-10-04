@@ -20,13 +20,15 @@ export default function PageTemplate({ children }: PageTemplateProps) {
     return (
         <div>
             <header style={{ backgroundColor: '#640a22ff' }} className="flex items-center justify-between">
-                <img
-                    src="/logo.png"
-                    alt="Logo"
-                    className="ml-2 p-2"
-                    width={125}
-                    height={50}
-                />
+                <button onClick={() => router.push('/')}>
+                    <img
+                        src="/logo.png"
+                        alt="Logo"
+                        className="ml-2 p-2"
+                        width={125}
+                        height={50}
+                    />
+                </button>
                 <div className="flex items-center space-x-3 mr-4">
                     <img
                         src="/profile.png"
@@ -53,9 +55,14 @@ export default function PageTemplate({ children }: PageTemplateProps) {
                         />
                         <button
                             type="submit"
-                            className="bg-white border border-gray-300 rounded-r-md px-4 py-2 text-sm"
+                            className="bg-white text-black border border-gray-300 rounded-r-md px-4 py-2 text-sm"
                         >
-                            Search
+                            <img
+                            src="/search.png"
+                            alt="Search"
+                            width={24}
+                            height={24}
+                        />
                         </button>
                     </div>
                 </form>
