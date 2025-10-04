@@ -9,7 +9,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "e-commerce",
+  title: "e-com",
   description: "An e-commerce website built with Next.js and TypeScript",
 };
 
