@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 
 export default function Home() {
@@ -15,7 +16,6 @@ export default function Home() {
           />
         </header>
       </div>
-
 
       <header style={{ backgroundColor: '#d8043cff' }}
         className="shadow-lg p-3 flex items-center justify-between">
@@ -42,10 +42,37 @@ export default function Home() {
       </header>
 
       <main className="p-6">
-        <div className="text-gray-600 text-center">
-          Placeholder for homepage content
+        <div className="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-5 gap-6">
+          {require("@/mock-data/shop-data.json").map((item: any) => (
+            <div
+              key={item.id}
+              className="bg-white rounded-lg shadow p-4 flex flex-col items-center"
+            >
+              <div className="h-48 w-full flex items-center justify-center mb-4">
+                <Image
+                  src={item.image}
+                  alt={item.name || "Product Image"}
+                  width={150}
+                  height={150}
+                  className="object-contain max-h-full"
+                />
+              </div>
+
+              <h2 className="text-xl font-bold mb-2 text-center">{item.name}</h2>
+
+              <p className="text-gray-700 mb-2">${item.price}</p>
+
+              <button
+                style={{ backgroundColor: "#d8043cff" }}
+                className="text-white px-4 py-2 rounded mt-auto"
+              >
+                Add to Cart
+              </button>
+            </div>
+          ))}
         </div>
       </main>
+
     </div>
   );
 }
