@@ -1,21 +1,21 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 type PageTemplateProps = {
     children: React.ReactNode;
-    onSearch?: (q: string) => void;
 };
 
-export default function PageTemplate({ children, onSearch }: PageTemplateProps) {
+export default function PageTemplate({ children }: PageTemplateProps) {
     const [input, setInput] = useState("");
+    const router = useRouter();
 
-    useEffect(() => {
-        const t = setTimeout(() => {
-            onSearch?.(input.trim());
-        }, 300);
-        return () => clearTimeout(t);
-    }, [input, onSearch]);
+    function onSubmit(e: React.FormEvent) {
+        e.preventDefault();
+        const q = input.trim();
+        router.push(`/search?q=${encodeURIComponent(q)}`);
+    }
 
     return (
         <div>
@@ -40,16 +40,25 @@ export default function PageTemplate({ children, onSearch }: PageTemplateProps) 
 
             <header style={{ backgroundColor: '#d8043cff' }}
                 className="shadow-lg p-3 flex items-center justify-between">
-                <div className="flex-1 max-w-xl">
-                    <input
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                        type="text"
-                        placeholder="Search for products..."
-                        style={{ color: 'black' }}
-                        className="bg-white w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring focus:border-blue-400"
-                    />
-                </div>
+                <form onSubmit={onSubmit} className="flex-1 max-w-xl">
+                    <div className="flex">
+                        <input
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                            name="q"
+                            type="text"
+                            placeholder="Search for products..."
+                            style={{ color: 'black' }}
+                            className="bg-white w-full border border-gray-300 rounded-l-md px-4 py-2 focus:outline-none focus:ring focus:border-blue-400"
+                        />
+                        <button
+                            type="submit"
+                            className="bg-white border border-gray-300 rounded-r-md px-4 py-2 text-sm"
+                        >
+                            Search
+                        </button>
+                    </div>
+                </form>
 
                 <div className="flex items-center space-x-2 cursor-pointer">
                     <span className="material-icons">
