@@ -1,10 +1,22 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 
 type PageTemplateProps = {
     children: React.ReactNode;
+    onSearch?: (q: string) => void;
 };
 
-export default function PageTemplate({ children }: PageTemplateProps) {
+export default function PageTemplate({ children, onSearch }: PageTemplateProps) {
+    const [input, setInput] = useState("");
+
+    useEffect(() => {
+        const t = setTimeout(() => {
+            onSearch?.(input.trim());
+        }, 300);
+        return () => clearTimeout(t);
+    }, [input, onSearch]);
+
     return (
         <div>
             <header style={{ backgroundColor: '#640a22ff' }} className="flex items-center justify-between">
@@ -30,6 +42,8 @@ export default function PageTemplate({ children }: PageTemplateProps) {
                 className="shadow-lg p-3 flex items-center justify-between">
                 <div className="flex-1 max-w-xl">
                     <input
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
                         type="text"
                         placeholder="Search for products..."
                         style={{ color: 'black' }}
