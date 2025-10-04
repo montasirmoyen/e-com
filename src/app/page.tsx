@@ -3,13 +3,23 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-100">
-      <header style={{ backgroundColor: '#301d69ff'}}
-       className="shadow-md p-4 flex items-center justify-between">
-        <div className="w-24 h-8 bg-gray-300 flex items-center justify-center text-sm">
-          Logo
-        </div>
+      <div className="">
+        <header style={{ backgroundColor: '#640a22ff' }}
+          className="flex items-center justify-between">
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            className="ml-2 p-2"
+            width={125}
+            height={50}
+          />
+        </header>
+      </div>
 
-        <div className="flex-1 max-w-xl mx-4">
+
+      <header style={{ backgroundColor: '#d8043cff' }}
+        className="shadow-lg p-3 flex items-center justify-between">
+        <div className="flex-1 max-w-xl">
           <input
             type="text"
             placeholder="Search for products..."
@@ -19,7 +29,14 @@ export default function Home() {
         </div>
 
         <div className="flex items-center space-x-2 cursor-pointer">
-          <span className="material-icons">shopping_cart</span>
+          <span className="material-icons">
+            <Image
+              src="/cart.png"
+              alt="Cart"
+              width={24}
+              height={24}
+            />
+          </span>
           <span className="text-sm font-medium">(0)</span>
         </div>
       </header>
