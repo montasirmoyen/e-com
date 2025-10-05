@@ -1,7 +1,10 @@
+"use client";
+
 import React from "react";
 import Navbar from "../../components/nav-bar";
 import data from "../../mock-data/shop-data.json";
 import Image from "next/image";
+import { useCart } from "../../components/cart-provider";
 
 type Rating = { rate: number; count: number };
 type Product = {
@@ -18,6 +21,7 @@ export default function ItemPage({ params }: { params: { id: string } }) {
   const id = Number(params.id);
   const items = data as Product[];
   const item = items.find((p) => p.id === id);
+  const { addToCart } = useCart();
 
   if (!item) {
     return (
@@ -55,7 +59,16 @@ export default function ItemPage({ params }: { params: { id: string } }) {
               <button className="bg-[#d8043cff] text-white px-6 py-3 rounded-lg font-semibold shadow hover:bg-[#b70335] transition cursor-pointer">
                 Buy now
               </button>
-              <button className="bg-white text-black border border-gray-300 px-5 py-3 rounded-lg font-semibold shadow hover:bg-[#d8043cff] hover:text-white transition cursor-pointer">
+              <button 
+                onClick={() => addToCart({
+                  id: item.id,
+                  title: item.title,
+                  price: item.price,
+                  image: item.image,
+                  category: item.category
+                })}
+                className="bg-white text-black border border-gray-300 px-5 py-3 rounded-lg font-semibold shadow hover:bg-[#d8043cff] hover:text-white transition cursor-pointer"
+              >
                 Add to cart
               </button>
             </div>
