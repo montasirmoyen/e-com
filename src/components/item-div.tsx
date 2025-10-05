@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 type Product = {
   id: number;
@@ -32,12 +33,12 @@ export default function ItemDiv({ item }: ItemDivProps) {
         {item.title}
       </h3>
       <p className="text-gray-700 mb-2">${item.price}</p>
-      <button
-        style={{ backgroundColor: "#d8043cff" }}
-        className="text-white px-4 py-2 rounded mt-auto"
+      <Link
+        href={`/item/${item.id}`}
+        className="text-white px-4 py-2 rounded mt-auto bg-[#d8043cff] hover:bg-[#b70335] transition"
       >
         View Item
-      </button>
+      </Link>
     </div>
   );
 }
