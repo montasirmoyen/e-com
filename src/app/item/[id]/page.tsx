@@ -23,6 +23,30 @@ export default function ItemPage({ params }: { params: { id: string } }) {
   const item = items.find((p) => p.id === id);
   const { addToCart } = useCart();
 
+  const handleAddToCart = () => {
+    addToCart({
+      id: item!.id,
+      title: item!.title,
+      price: item!.price,
+      image: item!.image,
+      category: item!.category
+    });
+    
+    const button = document.querySelector('[data-add-to-cart]') as HTMLButtonElement;
+    if (button) {
+      const originalText = button.textContent;
+      button.textContent = 'Added!';
+      button.classList.add('bg-green-500', 'hover:bg-green-600');
+      button.classList.remove('hover:bg-[#d8043cff]');
+      
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.classList.remove('bg-green-500', 'hover:bg-green-600');
+        button.classList.add('hover:bg-[#d8043cff]');
+      }, 1500);
+    }
+  };
+
   if (!item) {
     return (
       <Navbar>
@@ -60,13 +84,8 @@ export default function ItemPage({ params }: { params: { id: string } }) {
                 Buy now
               </button>
               <button 
-                onClick={() => addToCart({
-                  id: item.id,
-                  title: item.title,
-                  price: item.price,
-                  image: item.image,
-                  category: item.category
-                })}
+                data-add-to-cart
+                onClick={handleAddToCart}
                 className="bg-white text-black border border-gray-300 px-5 py-3 rounded-lg font-semibold shadow hover:bg-[#d8043cff] hover:text-white transition cursor-pointer"
               >
                 Add to cart
