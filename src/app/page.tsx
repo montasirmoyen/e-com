@@ -1,8 +1,8 @@
 
 "use client";
 
-import Navbar from "../components/nav-bar";
-import Recommendations from "../components/recommendations";
+import Navbar from "./components/nav-bar";
+import Recommendations from "./components/recommendations";
 
 export default function Home() {
   return (

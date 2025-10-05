@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../../components/nav-bar";
+import Navbar from "../components/nav-bar";
 
-const SearchPageClient = React.lazy(() => import("../../components/search-page-client"));
+const SearchPageClient = React.lazy(() => import("../components/search-page-client"));
 
 export default function SearchPage() {
   return (

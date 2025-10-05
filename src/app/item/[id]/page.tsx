@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "../../../components/nav-bar";
-import data from "@/mock-data/shop-data.json";
+import Navbar from "../../components/nav-bar";
+import data from "../../mock-data/shop-data.json";
 import Image from "next/image";
 
 type Rating = { rate: number; count: number };
