@@ -52,10 +52,10 @@ export default function ItemPage({ params }: { params: { id: string } }) {
             <p className="text-gray-700">{item.description}</p>
 
             <div className="flex items-center space-x-4 mt-4">
-              <button className="bg-[#d8043cff] text-white px-6 py-3 rounded-lg font-semibold shadow hover:bg-[#b70335] transition">
+              <button className="bg-[#d8043cff] text-white px-6 py-3 rounded-lg font-semibold shadow hover:bg-[#b70335] transition cursor-pointer">
                 Buy now
               </button>
-              <button className="bg-white text-black border border-gray-300 px-5 py-3 rounded-lg font-semibold shadow hover:bg-[#d8043cff] hover:text-white transition">
+              <button className="bg-white text-black border border-gray-300 px-5 py-3 rounded-lg font-semibold shadow hover:bg-[#d8043cff] hover:text-white transition cursor-pointer">
                 Add to cart
               </button>
             </div>

@@ -31,7 +31,7 @@ export default function PageTemplate({ children }: PageTemplateProps) {
                     <img
                         src="/logo.png"
                         alt="Logo"
-                        className="ml-2 p-2"
+                        className="ml-2 p-2 cursor-pointer"
                         width={125}
                         height={50}
                     />
@@ -50,7 +50,7 @@ export default function PageTemplate({ children }: PageTemplateProps) {
                     </div>
                 ) : (
                     <div className="flex items-center space-x-3 mr-4">
-                        <span onClick={() => loginWithRedirect()} className="text-white font-medium">Log In</span>
+                        <span onClick={() => loginWithRedirect()} className="text-white font-medium cursor-pointer">Log In</span>
                         <img
                             src="/profile.png"
                             alt="Profile"
@@ -64,7 +64,7 @@ export default function PageTemplate({ children }: PageTemplateProps) {
             <header style={{ backgroundColor: '#d8043cff' }}
                 className="shadow-lg p-3 flex items-center justify-between">
                 <form onSubmit={onSubmit} className="flex-1 max-w-xl">
-                    <div className="flex">
+                    <div className="flex cursor-pointer">
                         <input
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
@@ -76,7 +76,7 @@ export default function PageTemplate({ children }: PageTemplateProps) {
                         />
                         <button
                             type="submit"
-                            className="bg-white text-black border border-gray-300 rounded-r-md px-4 py-2 text-sm"
+                            className="bg-white text-black border border-gray-300 rounded-r-md px-4 py-2 text-sm cursor-pointer" 
                         >
                             <img
                                 src="/search.png"
