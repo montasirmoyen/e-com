@@ -141,8 +141,28 @@ export default function CartPage() {
                 </div>
                 
                 <button
+                  onClick={async () => {
+                    try {
+                      const origin = window.location.origin;
+                      const res = await fetch('/api/checkout', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ items: cart.map(i => ({ id: i.id, title: i.title, price: i.price, quantity: i.quantity })), origin }),
+                      });
+
+                      const json = await res.json();
+                      if (json?.url) {
+                        window.location.href = json.url;
+                      } else {
+                        alert('Failed to create checkout session');
+                        console.error('Checkout error', json);
+                      }
+                    } catch (err) {
+                      console.error('Checkout exception', err);
+                      alert('An error occurred creating the checkout session');
+                    }
+                  }}
                   className="w-full bg-[#d8043cff] text-white py-3 px-4 rounded-lg font-semibold shadow hover:bg-[#b70335] transition cursor-pointer mb-4"
-                  disabled
                 >
                   Proceed to Checkout
                 </button>
