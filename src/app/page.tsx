@@ -10,13 +10,13 @@ export default function Home() {
       <div className="min-h-screen bg-gray-100">
         <Recommendations
           title="Tech Recommendations"
-          subtitle="Tech products you may like"
+          subtitle="Products you may like"
           ids={[9, 10, 11, 12, 13]}
         />
 
         <Recommendations
           title="Fashion Recommendations"
-          subtitle="Fashion clothing you may like"
+          subtitle="Clothing you may like"
           ids={[1, 2, 3, 15, 5]}
         />
       </div>
