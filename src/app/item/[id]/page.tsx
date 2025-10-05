@@ -55,13 +55,9 @@ export default function ItemPage({ params }: { params: { id: string } }) {
               <button className="bg-[#d8043cff] text-white px-6 py-3 rounded-lg font-semibold shadow hover:bg-[#b70335] transition">
                 Buy now
               </button>
-              <button className="bg-white border border-gray-300 px-5 py-3 rounded-lg font-semibold shadow">
+              <button className="bg-white text-black border border-gray-300 px-5 py-3 rounded-lg font-semibold shadow hover:bg-[#d8043cff] hover:text-white transition">
                 Add to cart
               </button>
-            </div>
-
-            <div className="mt-6 text-sm text-gray-500">
-              <strong>Category:</strong> {item.category}
             </div>
           </div>
         </div>
