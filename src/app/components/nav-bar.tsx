@@ -90,7 +90,10 @@ export default function PageTemplate({ children }: PageTemplateProps) {
                     </div>
                 </form>
 
-                <div className="flex items-center space-x-2 cursor-pointer">
+                <div 
+                    onClick={() => router.push('/cart')}
+                    className="flex items-center space-x-2 cursor-pointer hover:bg-gray-100 rounded-lg px-2 py-1 transition-colors"
+                >
                     <span className="material-icons">
                         <img
                             src="/cart.png"
