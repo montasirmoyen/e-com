@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useCart } from "./cart-provider";
 
 type PageTemplateProps = {
     children: React.ReactNode;
@@ -13,6 +14,7 @@ export default function PageTemplate({ children }: PageTemplateProps) {
     const router = useRouter();
 
     const { isAuthenticated, logout, loginWithRedirect, user, isLoading } = useAuth0();
+    const { getTotalItems } = useCart();
 
     if (isLoading) {
         return <div className="p-6"> Loading authentication status...</div>;
@@ -97,7 +99,7 @@ export default function PageTemplate({ children }: PageTemplateProps) {
                             height={24}
                         />
                     </span>
-                    <span className="text-sm font-medium">(0)</span>
+                    <span className="text-sm font-medium">({getTotalItems()})</span>
                 </div>
             </header>
             {children}
