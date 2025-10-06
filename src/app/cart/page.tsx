@@ -66,19 +66,23 @@ export default function CartPage() {
                     <div key={item.id} className="p-6 hover:bg-gray-50 transition-colors">
                       <div className="flex items-center space-x-4">
                         <div className="flex-shrink-0">
-                          <Image
-                            src={item.image}
-                            alt={item.title}
-                            width={80}
-                            height={80}
-                            className="rounded-lg object-cover"
-                          />
+                          <a href={`/item/${item.id}`}>
+                            <Image
+                              src={item.image}
+                              alt={item.title}
+                              width={80}
+                              height={80}
+                              className="rounded-lg object-cover cursor-pointer"
+                            />
+                          </a>
                         </div>
                         
                         <div className="flex-1 min-w-0">
-                          <h3 className="text-lg font-medium text-gray-800 truncate">
-                            {item.title}
-                          </h3>
+                          <a href={`/item/${item.id}`}>
+                            <h3 className="text-lg font-medium text-gray-800 truncate cursor-pointer">
+                              {item.title}
+                            </h3>
+                          </a>
                           <p className="text-sm text-gray-500 capitalize">{item.category}</p>
                           <p className="text-lg font-bold text-[#d8043cff] mt-1">
                             ${item.price.toFixed(2)}
