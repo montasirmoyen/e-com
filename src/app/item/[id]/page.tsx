@@ -1,10 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../../components/nav-bar";
 import data from "../../mock-data/shop-data.json";
 import Image from "next/image";
 import { useCart } from "../../components/cart-provider";
+import { useAuth0 } from "@auth0/auth0-react";
 
 type Rating = { rate: number; count: number };
 type Product = {
@@ -22,6 +23,8 @@ export default function ItemPage({ params }: { params: { id: string } }) {
   const items = data as Product[];
   const item = items.find((p) => p.id === id);
   const { addToCart } = useCart();
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
+  const [buyLoading, setBuyLoading] = useState(false);
 
   const handleAddToCart = () => {
     addToCart({
@@ -80,8 +83,40 @@ export default function ItemPage({ params }: { params: { id: string } }) {
             <p className="text-gray-700">{item.description}</p>
 
             <div className="flex items-center space-x-4 mt-4">
-              <button className="bg-[#d8043cff] text-white px-6 py-3 rounded-lg font-semibold shadow hover:bg-[#b70335] transition cursor-pointer">
-                Buy now
+              <button
+                onClick={async () => {
+                  if (!isAuthenticated) {
+                    await loginWithRedirect();
+                    return;
+                  }
+
+                  setBuyLoading(true);
+                  try {
+                    const origin = window.location.origin;
+                    const res = await fetch('/api/checkout', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ items: [{ id: item!.id, title: item!.title, price: item!.price, quantity: 1 }], origin }),
+                    });
+
+                    const json = await res.json();
+                    if (json?.url) {
+                      window.location.href = json.url;
+                    } else {
+                      console.error('Checkout creation failed', json);
+                      alert('Failed to create checkout session');
+                    }
+                  } catch (err) {
+                    console.error('Checkout exception', err);
+                    alert('An error occurred creating the checkout session');
+                  } finally {
+                    setBuyLoading(false);
+                  }
+                }}
+                className={`bg-[#d8043cff] text-white px-6 py-3 rounded-lg font-semibold shadow hover:bg-[#b70335] transition cursor-pointer ${buyLoading ? 'opacity-60 cursor-wait' : ''}`}
+                disabled={buyLoading}
+              >
+                {buyLoading ? 'Processing...' : 'Buy now'}
               </button>
               <button 
                 data-add-to-cart
