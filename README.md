@@ -1,10 +1,6 @@
 # 🛍️ e-com
 An e-commerce demo website, showcasing features such as user authentication, dynamic cart management, and secure Stripe-based payments.
 
-> [!NOTE]
->
-> This app is still unfinished and being worked on.
-
 ## 🚀 Features
 - User Authentication: Sign up and log in
 
